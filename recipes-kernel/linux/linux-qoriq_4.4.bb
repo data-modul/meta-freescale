@@ -27,7 +27,7 @@ SCMVERSION ?= "y"
 LOCALVERSION = ""
 DELTA_KERNEL_DEFCONFIG ?= ""
 DELTA_KERNEL_DEFCONFIG_prepend_qoriq-arm64 = "lsdk.config "
-DELTA_KERNEL_DEFCONFIG_prepend_fsl-lsch2-32b = "multi_v7_lpae.config lsdk.config multi_v8.config "
+DELTA_KERNEL_DEFCONFIG_prepend_fsl-lsch2-32b = "multi_v7_lpae.config multi_v8.config lsdk.config "
 DELTA_KERNEL_DEFCONFIG_prepend_ls102xa = "multi_v7_lpae.config lsdk.config "
 
 do_merge_delta_config[dirs] = "${B}"
@@ -57,17 +57,6 @@ do_compile_prepend_fsl-lsch2-32b() {
 
 do_install_prepend_fsl-lsch2-32b() {
     rm -f ${STAGING_KERNEL_DIR}/arch/arm/boot/dts/freescale
-}
-
-do_install_append_qoriq-arm() {
-    install -m 0644 arch/${ARCH}/boot/zImage ${D}/boot/zImage-${KERNEL_VERSION}
-    ln -sf zImage-${KERNEL_VERSION} ${D}/boot/zImage
-}
-
-do_deploy_append_qoriq-arm() {
-    install -m 0644 arch/${ARCH}/boot/zImage ${DEPLOYDIR}/${ZIMAGE_BASE_NAME}.bin
-    ln -sf ${ZIMAGE_BASE_NAME}.bin ${DEPLOYDIR}/zImage-${MACHINE}.bin
-    ln -sf ${ZIMAGE_BASE_NAME}.bin ${DEPLOYDIR}/zImage
 }
 
 FILES_kernel-image += "/boot/zImage*"
