@@ -4,7 +4,7 @@
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
 # Backward compatibility
 PROVIDES += "libfslcodec"
@@ -48,7 +48,7 @@ python __set_insane_skip() {
         # the source we cannot fix it. Disable the insane check for now.
         if p == 'imx-codec-test-bin':
             # FIXME: includes the DUT .so files so we need to deploy those
-            d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir")
+            d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir file-rdeps")
         else:
             d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel")
 }
